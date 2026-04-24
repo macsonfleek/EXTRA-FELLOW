@@ -1,18 +1,18 @@
 package main
 
 import (
-	"errors"
 	"os"
 )
 
-var inputFileError error = errors.New("Error: Cannot read inpute file")
+func getFileContent(fileName string) (string, error) {
 
-func getFileContent(filename string) (string, error) {
-	byteData, err := os.ReadFile(filename)
+	byteData, err := os.ReadFile(fileName)
 
 	if err != nil {
-		return "", inputFileError
+		return "", err
 	}
+
 	fileContent := string(byteData)
 	return fileContent, nil
+
 }

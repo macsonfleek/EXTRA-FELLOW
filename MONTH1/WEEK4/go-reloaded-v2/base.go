@@ -6,65 +6,61 @@ import (
 )
 
 func ParseHex(content string) string {
-
 	splitContent := strings.Fields(content)
 
 	for index, word := range splitContent {
-		if word == "(hex)" {
-
+		if word == "(hex)" && index > 0 {
 			hexVal := splitContent[index-1]
-
 			newValue, err := strconv.ParseInt(hexVal, 16, 64)
-
+			if err != nil {
+				splitContent = append(splitContent[:index], splitContent[index+1:]...)
+				continue
+			}
 			splitContent[index-1] = strconv.Itoa(int(newValue))
-
 			splitContent = append(splitContent[:index], splitContent[index+1:]...)
-
 		}
 	}
-	transformedHex := strings.Join(splitContent, " ")
-	return transformedHex
+
+	tranformedHex := strings.Join(splitContent, " ")
+	return tranformedHex
 }
 
-
 func ParseBin(content string) string {
-
 	splitContent := strings.Fields(content)
 
 	for index, word := range splitContent {
-		if word == "(bin)" {
-
-			hexVal := splitContent[index-1]
-
-			newValue, _ := strconv.ParseInt(hexVal, 2, 64)
-
+		if word == "(bin)" && index > 0 {
+			binVal := splitContent[index-1]
+			newValue, err := strconv.ParseInt(binVal, 2, 64)
+			if err != nil {
+				splitContent = append(splitContent[:index], splitContent[index+1:]...)
+				continue
+			}
 			splitContent[index-1] = strconv.Itoa(int(newValue))
-
 			splitContent = append(splitContent[:index], splitContent[index+1:]...)
-
 		}
 	}
-	transformedBin := strings.Join(splitContent, " ")
-	return transformedBin
+
+	tranformedBin := strings.Join(splitContent, " ")
+	return tranformedBin
 }
 
 func ParseOct(content string) string {
-
 	splitContent := strings.Fields(content)
 
 	for index, word := range splitContent {
-		if word == "(oct)" {
-
+		if word == "(oct)" && index > 0 {
 			octVal := splitContent[index-1]
-
-			newValue, _ := strconv.ParseInt(octVal, 8, 64)
-
+			newValue, err := strconv.ParseInt(octVal, 8, 64)
+			if err != nil {
+				splitContent = append(splitContent[:index], splitContent[index+1:]...)
+				continue
+			}
 			splitContent[index-1] = strconv.Itoa(int(newValue))
-
 			splitContent = append(splitContent[:index], splitContent[index+1:]...)
-
 		}
 	}
-	transformedOct := strings.Join(splitContent, " ")
-	return transformedOct
+
+	tranformedOct := strings.Join(splitContent, " ")
+	return tranformedOct
 }

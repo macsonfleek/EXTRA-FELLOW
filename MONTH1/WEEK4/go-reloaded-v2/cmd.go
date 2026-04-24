@@ -1,10 +1,8 @@
 package main
 
-import (
-	"errors"
-)
+import "errors"
 
-var InvalidInputError error = errors.New("Error: Please provide exactly one inpute file and outpute files")
+var InvalidInputError error = errors.New("Error: Please provide exactly one input file and one output file.")
 
 func parseArgs(args []string) (string, string, error) {
 
@@ -14,7 +12,6 @@ func parseArgs(args []string) (string, string, error) {
 
 	inputFileName := args[1]
 	outputFileName := args[2]
-	
+
 	return inputFileName, outputFileName, nil
 }
-
